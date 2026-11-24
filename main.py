@@ -7,13 +7,16 @@ The line is a fixed string in the code.
 
 import os
 
-FORECAST = "Puddlington: heavy rain all day, puddles promoted to ponds \u2014 the ducks have queued at the bus stop, and honestly, they look drier than us."
+FORECAST = "Puddlington: heavy rain all day, puddles promoted to ponds — the ducks have queued at the bus stop, and honestly, they look drier than us."
 
 def main():
     os.makedirs("/output", exist_ok=True)
     # Competition gate: the forecast line must be 1-140 characters long.
     if not 1 <= len(FORECAST) <= 140:
         raise SystemExit(f"Forecast line must be 1-140 characters, got {len(FORECAST)}.")
+    # Competition gate: the forecast line must not be only white space.
+    if not FORECAST.strip():
+        raise SystemExit("Forecast line must not be only white space.")
     with open("/output/entry.txt", "w", encoding="utf-8") as f:
         f.write(FORECAST)
 
